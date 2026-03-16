@@ -1,10 +1,12 @@
+gunicorn==25.1.0
+packaging==26.0
 flask
 flask_sqlalchemy
-flask_security_too
-flask_restful
+flask-security-too
+flask-restful
 flask-cors
 argon2-cffi
 celery
 pandas
-flask_mail
 redis
+flask-mail
