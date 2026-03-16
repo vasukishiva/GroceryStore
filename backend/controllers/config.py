@@ -1,0 +1,5 @@
+class Config:
+    SECRET_KEY="YOUR_SECRET_KEY"
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
+    
+    SECURITY_PASSWORD_SALT ='YOUR_PASSWORD_SALT_HERE'
