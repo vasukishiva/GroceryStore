@@ -27,6 +27,7 @@ import { ref } from 'vue';
 import { useMessageStore } from '@/stores/errormessage';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
+import { BASE_URL } from '@/config';
 const router = useRouter();
 
 const messageStore = useMessageStore();
@@ -63,7 +64,7 @@ async function login() {
         password: password.value
     }
 
-    const response = await fetch("http://127.0.0.1:5000/api/login", {
+    const response = await fetch(`${BASE_URL}/api/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
