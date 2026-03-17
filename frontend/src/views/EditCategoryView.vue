@@ -2,6 +2,8 @@
 import { useRoute } from 'vue-router';
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { BASE_URL } from '@/config';
+
 const router = useRouter(); 
 
 import { useAuthStore } from '@/stores/auth';
@@ -14,7 +16,7 @@ const category = ref(null);
 
 onMounted(() => {
   // Fetch category details based on categoryId
-  fetch(`http://localhost:5000/categories/${categoryId}`)
+  fetch(`${BASE_URL}/categories/${categoryId}`)
     .then(response => response.json())
     .then(data => {
       category.value = data;
@@ -48,7 +50,7 @@ const editCategory = async (event) => {
         return;
     }
   try {
-    const response = await fetch(`http://localhost:5000/categories/${categoryId}`, {
+    const response = await fetch(`${BASE_URL}/categories/${categoryId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

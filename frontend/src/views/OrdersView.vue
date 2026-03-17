@@ -57,7 +57,7 @@ Pay Now
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-
+import { BASE_URL } from '@/config';
 
 const authStore = useAuthStore()
 
@@ -67,7 +67,7 @@ const token = authStore.getAuthToken()
 
 const orders = ref([])
 async function fetchOrders(){
-    const res = await fetch('http://localhost:5000/orders', {
+    const res = await fetch(`${BASE_URL}/orders`, {
     method: 'GET',
     headers: {
         'Authentication-Token': token
@@ -108,7 +108,7 @@ onMounted(async () => {
 
 async function pay(orderId){
 
-await fetch("http://localhost:5000/fake_payment",{
+await fetch(`${BASE_URL}/fake_payment`,{
 method:"POST",
 headers:{
 "Content-Type":"application/json",

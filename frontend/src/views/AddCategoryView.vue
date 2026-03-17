@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useMessageStore } from '@/stores/errormessage';
 import { useAuthStore } from '@/stores/auth';
+import { BASE_URL } from '@/config';
 
 const messageStore = useMessageStore();
 const authStore = useAuthStore();
@@ -57,7 +58,7 @@ async function addCategory() {
     console.log('ROLES:', authStore.getUserRoles())
 
 
-    const response = await fetch("http://localhost:5000/categories", {
+    const response = await fetch(`${BASE_URL}/categories`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

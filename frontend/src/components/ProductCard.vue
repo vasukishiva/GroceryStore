@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { defineProps } from 'vue'
 import { useCartStore } from '@/stores/cart';
+import { BASE_URL } from '@/config';
 
 
 
@@ -31,7 +32,7 @@ const deleteProduct = async (productId) => {
     }
 
     try {
-        const response = await fetch(`http://localhost:5000/products/${productId}`, {
+        const response = await fetch(`${BASE_URL}/products/${productId}`, {
             method: 'DELETE',
             headers: {
                 'Authentication-Token': token
@@ -59,7 +60,7 @@ const addToCart = async () => {
     }
 
     try {
-        const response = await fetch(`http://localhost:5000/user_cart`, {
+        const response = await fetch(`${BASE_URL}/user_cart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,7 +101,7 @@ const addToCart = async () => {
         <!-- Product Image -->
         <img
             v-if="product.image_file"
-            :src="`http://localhost:5000/static/uploads/products/${product.image_file}`"
+            :src="`${BASE_URL}/static/uploads/products/${product.image_file}`"
             class="card-img-top"
             alt="Product Image"
             style="height: 200px; object-fit: cover;"

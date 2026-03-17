@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import ProductCard from '@/components/ProductCard.vue'
+import { BASE_URL } from '@/config';
 
 const route = useRoute()
 const categoryId = route.params.id
@@ -12,7 +13,7 @@ const loading = ref(true)
 const fetchProducts = async () => {
   try {
     const res = await fetch(
-      `http://localhost:5000/categories/${categoryId}/products`
+      `${BASE_URL}/categories/${categoryId}/products`
     )
     products.value = await res.json()
     console.log('Fetched products for category:', products.value)

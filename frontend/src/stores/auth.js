@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { BASE_URL } from '@/config';
 
 
 export const useAuthStore = defineStore('authStore', () => {
@@ -42,7 +43,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
     async function logout() {
         try {
-            await fetch('http://localhost:5000/api/logout', {
+            await fetch(`${BASE_URL}/api/logout`, {
                 method: 'POST',
                 headers: {
                     

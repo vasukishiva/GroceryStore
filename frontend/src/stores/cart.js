@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { useAuthStore } from './auth'
+import { BASE_URL } from '@/config';
 
 export const useCartStore = defineStore('cart', () => {
   const cartItems = ref([])
@@ -18,7 +19,7 @@ export const useCartStore = defineStore('cart', () => {
     }
 
 
-    const res = await fetch('http://localhost:5000/user_cart', {
+    const res = await fetch(`${BASE_URL}/user_cart`, {
       headers: {
         'Authentication-Token': authStore.getAuthToken()
       }

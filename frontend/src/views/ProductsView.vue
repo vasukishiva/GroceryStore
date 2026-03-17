@@ -4,6 +4,7 @@
     import { ref, onMounted, computed, watch } from 'vue';
     import { useAuthStore } from '@/stores/auth'; 
     import { useRoute, useRouter } from 'vue-router';
+    import { BASE_URL } from '@/config';
     
     const route = useRoute()
     const router = useRouter()
@@ -24,14 +25,14 @@
     const category_id = ref('')
 
     const fetchCategories =  async () => {
-        const res = await fetch('http://localhost:5000/categories')
+        const res = await fetch(`${BASE_URL}/categories`)
         categories.value = await res.json()
     }
 
     const fetchProducts = async () => {
       const search = route.query.search || ''
 
-      const res = await fetch(`http://localhost:5000/products?search=${search}`)
+      const res = await fetch(`${BASE_URL}/products?search=${search}`)
       products.value = await res.json()
     }
 
@@ -42,7 +43,7 @@
 
     const loadProductForEdit = async (id) => {
       if(!id) return
-      const res = await fetch(`http://localhost:5000/products/${id}`)
+      const res = await fetch(`${BASE_URL}/products/${id}`)
       const data = await res.json()
       name.value = data.name
       description.value = data.description
@@ -109,7 +110,7 @@
             formData.append('image', image.value)
         }
 
-        const url = isEdit.value ? `http://localhost:5000/products/${route.params.id}`: `http://localhost:5000/products`
+        const url = isEdit.value ? `${BASE_URL}/products/${route.params.id}`: `${BASE_URL}/products`
 
         const method = isEdit.value ? 'PUT' : 'POST'
 

@@ -3,6 +3,7 @@
     import Products from './Products.vue';   
     import { useAuthStore } from '@/stores/auth';
     import { useRouter } from 'vue-router';
+    import { BASE_URL } from '@/config';
 
     const router = useRouter();
 
@@ -20,7 +21,7 @@
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/categories/${categoryId}`, {
+            const response = await fetch(`${BASE_URL}/categories/${categoryId}`, {
                 method: 'DELETE',
                 headers: {
 

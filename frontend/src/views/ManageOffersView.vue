@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { BASE_URL } from '@/config';
 
 const authStore = useAuthStore()
 const token = authStore.getAuthToken()
@@ -15,7 +16,7 @@ const products = ref([])
 const categories = ref([])
 
 const fetchMeta = async () => {
-  const res = await fetch('http://localhost:5000/offers/meta')
+  const res = await fetch(`${BASE_URL}/offers/meta`)
   const data = await res.json()
   console.log('meta data:', data)
   products.value = data.products
@@ -23,20 +24,20 @@ const fetchMeta = async () => {
 }
 
 const fetchOffers = async () => {
-  const res = await fetch('http://localhost:5000/offers/list')
+  const res = await fetch(`${BASE_URL}/offers/list`)
   offers.value = await res.json()
 }
 const deleteOffer = async (offer) => {
 
   if (offer.offer_type === 'product') {
-    await fetch(`http://localhost:5000/offers/products/${offer.product_id}`, {
+    await fetch(`${BASE_URL}/offers/products/${offer.product_id}`, {
       method: 'DELETE',
       headers: {
         'Authentication-Token': token
       }
     })
   } else {
-    await fetch(`http://localhost:5000/offers/categories/${offer.category_id}`, {
+    await fetch(`${BASE_URL}/offers/categories/${offer.category_id}`, {
       method: 'DELETE',
       headers: {
         'Authentication-Token': token
@@ -74,7 +75,7 @@ const submitOffer = async () => {
     category_id: offerType.value === 'category' ? selectedCategory.value : null
   }
 
-  await fetch('http://localhost:5000/offers', {
+  await fetch(`${BASE_URL}/offers`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

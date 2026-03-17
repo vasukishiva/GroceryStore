@@ -3,6 +3,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cart'
 import { useRouter } from 'vue-router'
+import { BASE_URL } from '@/config'
 
 const router = useRouter()
 const loading = ref(false)
@@ -21,7 +22,7 @@ async function checkout() {
   loading.value = true
 
   try {
-    const res = await fetch(`http://localhost:5000/checkout`, {
+    const res = await fetch(`${BASE_URL}/checkout`, {
       method: 'POST',
       headers: {
         'Authentication-Token': token
@@ -43,7 +44,7 @@ async function checkout() {
 }
 
 const fetchCart = async () => {
-  const res = await fetch(`http://localhost:5000/user_cart`, {
+  const res = await fetch(`${BASE_URL}/user_cart`, {
     method: 'GET',
     headers: {
       'Authentication-Token': token
@@ -62,7 +63,7 @@ onMounted(fetchCart)
 const updateQuantity = async (cartItemId, qty) => {
   if (qty < 1) return
 
-  await fetch(`http://localhost:5000/user_cart/${cartItemId}`, {
+  await fetch(`${BASE_URL}/user_cart/${cartItemId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ const updateQuantity = async (cartItemId, qty) => {
 
 // Delete item
 const deleteItem = async (cartItemId) => {
-  await fetch(`http://localhost:5000/user_cart/${cartItemId}`, {
+  await fetch(`${BASE_URL}/user_cart/${cartItemId}`, {
     method: 'DELETE',
     headers: {
       'Authentication-Token': token

@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
 import os
 from flask import current_app
+from flask import request
 
 
 UPLOAD_FOLDER = 'static/uploads/products/'
@@ -211,7 +212,7 @@ class ProductCrudAPI(Resource):
                 'category_id': product.category_id,
                 'image_file': product.image_file,
             
-                'image_url':f"http://localhost:5000/static/uploads/products/{product.image_file}"
+                'image_url':request.host_url + f"static/uploads/products/{product.image_file}"
             }
             
         query = Products.query
@@ -241,7 +242,7 @@ class ProductCrudAPI(Resource):
                 'offer_percentage': p.offer_percentage,
                 'category_id': p.category_id,
                 'image_file': p.image_file,
-                'image_url':f"http://localhost:5000/static/uploads/products/{p.image_file}"
+                'image_url':request.host_url + f"static/uploads/products/{p.image_file}"
             })
         return result, 200
         #     if not product:
@@ -376,7 +377,7 @@ class LatestProductsAPI(Resource):
                     'offer_percentage': p.offer_percentage,
                     'category_id': p.category_id,
                     'image_file': p.image_file,
-                    'image_url':f"http://localhost:5000/static/uploads/products/{p.image_file}"
+                    'image_url':request.host_url + f"static/uploads/products/{p.image_file}"
                 })
             return make_response(jsonify(result), 200)
     

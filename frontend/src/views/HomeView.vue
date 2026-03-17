@@ -3,6 +3,8 @@ import Category from '@/components/Category.vue';
 import { useAuthStore } from '@/stores/auth';
 import { onMounted, ref } from 'vue';
 import ProductCard from '@/components/ProductCard.vue';
+import { BASE_URL } from '@/config';
+
 // import { useCartStore } from '@/stores/cart';
 
 const auth = useAuthStore();
@@ -15,7 +17,7 @@ const offerProducts = ref([]);
 //fetch offer products
 const fetchOfferProducts = async () => {
   try {
-    const response = await fetch('http://localhost:5000/offers/products');
+    const response = await fetch(`${BASE_URL}/offers/products`);
     if (!response.ok) {
       throw new Error('Failed to fetch offer products');
     }
@@ -25,7 +27,7 @@ const fetchOfferProducts = async () => {
   }
 };
 // Fetch categories from API 
-fetch('http://localhost:5000/categories')
+fetch(`${BASE_URL}/categories`)
   .then(response => response.json())
   .then(data => {
     categories.value = data;
@@ -36,7 +38,7 @@ fetch('http://localhost:5000/categories')
 
 const fetchLatestProducts = async () => {
   try {
-    const response = await fetch('http://localhost:5000/products/latest');
+    const response = await fetch(`${BASE_URL}/products/latest`);
     if (!response.ok) {
       throw new Error('Failed to fetch latest products');
     }

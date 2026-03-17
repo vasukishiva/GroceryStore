@@ -25,6 +25,8 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useMessageStore } from '@/stores/errormessage';
+import { BASE_URL } from '@/config';
+
 const messageStore = useMessageStore();
 
 const router = useRouter();
@@ -48,7 +50,7 @@ function validatepassword() {
 function checkEmailAvailability() {
 
     if (email.value.includes('@')){
-        fetch('http://localhost:5000/api/check_email', {
+        fetch(`${BASE_URL}/api/check_email`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -98,7 +100,7 @@ async function register() {
         password: password.value
     }
 
-    const response = await fetch("http://localhost:5000/api/register", {
+    const response = await fetch(`${BASE_URL}/api/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
