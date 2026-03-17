@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_security import Security, utils
 from controllers.database import db
 from controllers.config import Config
 from controllers.user_datastore import user_datastore
 from flask_restful import Api
-from flask import send_from_directory
+import os
 from flask_mail import Mail
 
 from flask_cors import CORS
@@ -39,7 +39,7 @@ app, api = create_app()
 
 @app.route('/static/uploads/products/<filename>')
 def uploaded_file(filename):
-    return send_from_directory('static/uploads/products', filename)
+    return send_from_directory(os.path.join(app.root_path, 'static/uploads/products'), filename)
 
 @app.route('/celery_example', methods=['GET'])
 def celery_example():
