@@ -6,6 +6,7 @@ from controllers.user_datastore import user_datastore
 from flask_restful import Api
 import os
 from flask_mail import Mail
+from controllers.cache import cache
 
 from flask_cors import CORS
 
@@ -14,9 +15,15 @@ def create_app():
         app = Flask(__name__)
         app.config.from_object(Config)
         
+        app.config['CACHE_TYPE'] = 'RedisCache'
+        app.config['CACHE_REDIS_URL'] = os.getenv('REDIS_URL')
+        app.config['CACHE_DEFAULT_TIMEOUT'] = 60
+        
         CORS(app)
 
         db.init_app(app)
+        cache.init_app(app)
+        
         security = Security(app, user_datastore)
         api = Api(app)
         with app.app_context():

@@ -10,6 +10,7 @@ from werkzeug.utils import secure_filename
 import os
 from flask import current_app
 from flask import request
+from controllers.cache import cache
 
 
 UPLOAD_FOLDER = 'static/uploads/products/'
@@ -26,6 +27,7 @@ def allowed_file(filename):
 #CRUD APIS for the Categories model
 
 class CategoryCrudAPI(Resource):
+    @cache.cached(timeout=60, query_string=True)
     def get(self, category_id=None):
         if category_id:
             
@@ -110,7 +112,7 @@ class CategoryCrudAPI(Resource):
         )
         db.session.add(new_category)
         db.session.commit()
-        
+        cache.clear()
         result = {
             'message': 'Category created successfully',
             'data': {
@@ -163,7 +165,7 @@ class CategoryCrudAPI(Resource):
         #     category.image_file = image_file
         
         db.session.commit()
-        
+        cache.clear()
         result = {
             'message': 'Category updated successfully',
             'data': {
@@ -184,7 +186,7 @@ class CategoryCrudAPI(Resource):
         
         db.session.delete(category)
         db.session.commit()
-        
+        cache.clear()
         result = {'message': 'Category deleted successfully'}
         return make_response(jsonify(result), 200)
     
@@ -193,6 +195,7 @@ class CategoryCrudAPI(Resource):
 # crud apis for Products
 
 class ProductCrudAPI(Resource):
+    @cache.cached(timeout=60, query_string=True)
     def get(self, product_id=None):
         category_id = request.args.get('category_id')
         search = request.args.get('search')
@@ -303,7 +306,7 @@ class ProductCrudAPI(Resource):
         )
         db.session.add(product)
         db.session.commit()
-        
+        cache.clear()
         return make_response(jsonify({
             'message': 'Product created successfully'}), 201)
 
@@ -338,6 +341,7 @@ class ProductCrudAPI(Resource):
             file.save(filepath)
             product.image_file = filename
         db.session.commit()
+        cache.clear()
         return make_response(jsonify({
             'message': 'Product updated successfully'}), 200)
         
@@ -355,12 +359,13 @@ class ProductCrudAPI(Resource):
         
         db.session.delete(product)
         db.session.commit()
-        
+        cache.clear()
         result = {'message': 'Product deleted successfully'}
         return make_response(jsonify(result), 200)
     
     
 class LatestProductsAPI(Resource):
+    @cache.cached(timeout=60, query_string=True)
     def get(self):
         # products = Products.query.order_by(Products.created_at.desc()).limit(5).all()
         # return [p.to_dict() for p in products]
@@ -382,6 +387,7 @@ class LatestProductsAPI(Resource):
             return make_response(jsonify(result), 200)
     
 class CategoryProductsAPI(Resource):
+    @cache.cached(timeout=60)
     def get(self, category_id):
         products = Products.query.filter_by(category_id=category_id).all()
         return [
