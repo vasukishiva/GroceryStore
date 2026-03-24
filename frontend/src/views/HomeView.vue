@@ -78,14 +78,14 @@ onMounted(() => {
         </div>
       </div>
       <div class="carousel-item">
-        <img src="/src/assets/images/slides/slide2.png" class="d-block w-100" alt="Dairy Products">
+        <img src="/src/assets/images/slides/slide2.jpg" class="d-block w-100" alt="Dairy Products">
         <div class="carousel-caption d-none d-md-block">
           <h5>Dairy Products</h5>
           <p>Discover our wide selection of milk, cheese, and yogurt.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="/src/assets/images/slides/slide3.avif" class="d-block w-100" alt="Bakery Items">
+        <img src="/src/assets/images/slides/slide6.avif" class="d-block w-100" alt="Bakery Items">
         <div class="carousel-caption d-none d-md-block">
           <h5>Bakery Items</h5>
           <p>Indulge in our freshly baked bread, pastries, and cakes.</p>
@@ -118,8 +118,13 @@ onMounted(() => {
     <Category :category="category" />
   </div>
 </div>
-
+<div class="d-flex justify-content-between align-items-center mb-3">
 <h3 class="mt-5 mb-3">Recently Added Products</h3>
+<div>
+  
+  <RouterLink class="btn btn-secondary" to="/products">View All Products</RouterLink>
+  </div>
+  </div>
 <div class="row row-cols-1 row-cols-md-5 g-3">
   <div class="col" v-for="product in latestProducts" :key="product.id">
     <ProductCard :product="product" />
@@ -165,4 +170,8 @@ onMounted(() => {
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
 }
+.carousel-inner img {
+  height: 400px;
+}
+
 </style>

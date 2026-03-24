@@ -60,6 +60,12 @@ const router = createRouter({
       props: true,
     },
     {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('../views/ContactView.vue'),
+
+    },
+    {
       path: '/manage-offers',
       name: 'manage-offers',
       component: () => import('../views/ManageOffersView.vue'),

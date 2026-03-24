@@ -43,9 +43,10 @@ const displayUserEmail = computed(() => {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <RouterLink class="nav-link" to="/about">About</RouterLink>
-            </li>
+            </li> -->
+            
 
             <li class="nav-item" v-if="authStore.isAuthenticated">
               <p class="nav-link">Hello, {{ displayUserEmail }}</p>
@@ -152,6 +153,29 @@ const displayUserEmail = computed(() => {
     </div>
     <RouterView/>
   </div>
+  <footer class="bg-dark text-white py-4 mt-5">
+  <div class="container text-center">
+    
+    <h5 class="mb-2">Grocery Store</h5>
+    
+    <p class="mb-2">
+      Fresh groceries delivered to your doorstep 🛒
+    </p>
+
+    <div class="mb-2">
+      <a href="/" class="text-white me-3">Home</a>
+      <a href="/products" class="text-white me-3">Products</a>
+      <a href="/contact" class="text-white">Contact</a>
+      <a href="/about" class="text-white ms-3">About</a>
+      
+    </div>
+
+    <p class="mb-0 small">
+      © 2026 Grocery Store | Built with Vue & Flask
+    </p>
+
+  </div>
+</footer>
    
 
 </template>

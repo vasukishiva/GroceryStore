@@ -104,7 +104,7 @@ const addToCart = async () => {
             :src="`${BASE_URL}/static/uploads/products/${product.image_file}`"
             class="card-img-top"
             alt="Product Image"
-            style="height: 200px; object-fit: cover;"
+            
         />
         <div class="card-body d-flex flex-column">
             <!-- Product Name -->
@@ -131,16 +131,24 @@ const addToCart = async () => {
 }
 .card-img-top {
     border-bottom: 1px solid #ddd;
+    height: 140px;   /* reduce image size */
+    object-fit: cover;
 }
 .card-body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
 }
 .btn {
     width: 100%;    
 }   
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 220px;   /* control total height */
+    font-size: 14px;
+}
 
 
 </style>
-    
+    <!-- style="height: 200px; object-fit: cover;" -->

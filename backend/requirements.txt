@@ -10,3 +10,4 @@ celery
 pandas
 redis
 flask-mail
+flask-caching
