@@ -163,11 +163,10 @@ const displayUserEmail = computed(() => {
     </p>
 
     <div class="mb-2">
-      <a href="/" class="text-white me-3">Home</a>
-      <a href="/products" class="text-white me-3">Products</a>
-      <a href="/contact" class="text-white">Contact</a>
-      <a href="/about" class="text-white ms-3">About</a>
-      
+      <RouterLink to="/" class="text-white me-3">Home</RouterLink>
+      <RouterLink to="/products" class="text-white me-3">Products</RouterLink>
+      <RouterLink to="/contact" class="text-white">Contact</RouterLink>
+      <RouterLink to="/about" class="text-white ms-3">About</RouterLink>
     </div>
 
     <p class="mb-0 small">
