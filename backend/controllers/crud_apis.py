@@ -29,6 +29,7 @@ def allowed_file(filename):
 class CategoryCrudAPI(Resource):
     @cache.cached(timeout=60, query_string=True)
     def get(self, category_id=None):
+        print("🔥 DB HIT")
         if category_id:
             
             category = Categories.query.get_or_404(category_id)
@@ -197,6 +198,7 @@ class CategoryCrudAPI(Resource):
 class ProductCrudAPI(Resource):
     @cache.cached(timeout=60, query_string=True)
     def get(self, product_id=None):
+        print("🔥 DB HIT")
         category_id = request.args.get('category_id')
         search = request.args.get('search')
         if product_id:
