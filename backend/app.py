@@ -18,7 +18,7 @@ def create_app():
         app.config['CACHE_TYPE'] = 'RedisCache'
         app.config['CACHE_REDIS_URL'] = os.getenv('REDIS_URL')
         app.config['CACHE_DEFAULT_TIMEOUT'] = 60
-        
+        print("Redis URL:", os.getenv("REDIS_URL"))
         CORS(app)
 
         db.init_app(app)
