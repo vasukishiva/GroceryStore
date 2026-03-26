@@ -4,6 +4,7 @@ import { useAuthStore } from '@/stores/auth';
 import { onMounted, ref } from 'vue';
 import ProductCard from '@/components/ProductCard.vue';
 import { BASE_URL } from '@/config';
+import RecommendedProductView from '@/components/RecommendedProductView.vue';
 
 // import { useCartStore } from '@/stores/cart';
 
@@ -58,6 +59,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <br>
   <div class="text-center mb-4">
     <h1 class="fw-bold">Welcome to the Grocery Store!</h1>
     <p class="text-muted">Find the best products at unbeatable prices.</p>
@@ -70,14 +72,14 @@ onMounted(() => {
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active">
+      <div class="carousel-item">
         <img src="/src/assets/images/slides/slide1.avif" class="d-block w-100" alt="Fresh Produce">
         <div class="carousel-caption d-none d-md-block">
           <h5>Fresh Produce</h5>
           <p>Get the freshest fruits and vegetables delivered to your door.</p>
         </div>
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item active">
         <img src="/src/assets/images/slides/slide2.jpg" class="d-block w-100" alt="Dairy Products">
         <div class="carousel-caption d-none d-md-block">
           <h5>Dairy Products</h5>
@@ -130,6 +132,14 @@ onMounted(() => {
     <ProductCard :product="product" />
   </div>
 </div>
+
+<div v-if="!isAdmin">
+    <!-- other sections -->
+  
+    <RecommendedProductView />
+  
+
+  </div>
 
 <h3 class="mt-5 mb-3">Special Offers</h3>
 <div v-if="isAdmin" class="d-flex justify-content-end mb-3 gap-2">

@@ -271,3 +271,20 @@ class UserOrderAPI(Resource):
             result.append(order_data)
         
         return make_response(jsonify(result), 200)
+    
+    @auth_required('token')
+    def delete(self, order_id):
+
+        order = Orders.query.get(order_id)
+
+        if not order:
+            return {"message": "Order not found"}, 404
+
+        # Optional: allow delete only if not paid
+        if order.status == "PAID":
+            return {"message": "Cannot delete paid order"}, 400
+
+        db.session.delete(order)
+        db.session.commit()
+
+        return {"message": "Order deleted"}, 200

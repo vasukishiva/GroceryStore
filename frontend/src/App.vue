@@ -53,51 +53,7 @@ const displayUserEmail = computed(() => {
             </li>
 
             </ul>
-           
-
-          <!-- left links
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <RouterLink class="nav-link active" to="/login">Login</RouterLink>
-            </li>
-            <li class="nav-item">
-              <RouterLink class="nav-link active" to="/register">Register</RouterLink>
-            </li>
-          </ul>-->
-
-          <!-- search bar
-            
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <RouterLink class="nav-link active" to="/login">Login</RouterLink>
-            </li>
-
-            <li class="nav-item">
-              <RouterLink class="nav-link active" to="/register">Register</RouterLink>
-            </li>
-            
-          </ul>-->
-
-          <form class="d-flex mx-auto" @submit.prevent="searchProduct">
-            <input
-              v-model="searchText"
-              class="form-control me-2"
-              type="search"
-              placeholder="Type the product name"
-            />
-
-            <button class="btn btn-outline-success" type="submit">
-              <img src="/src/assets/images/search.png" width="20" height="20"/>
-            </button>
-          </form>
-
-
-          <!-- <form class="d-flex mx-auto" role="search">
-            <input class="form-control me-2" type="search" placeholder="Type the product name" aria-label="Search"/>
-            <button class="btn btn-outline-success" type="submit"><img src="/src/assets/images/search.png" alt="Search" width="20" height="20"/></button>
-          </form> -->
-
+          
           <!-- cart button-->
            <div v-if="!authStore.getUserRoles().includes('admin')">
            <RouterLink to="/cart" class="btn btn-outline-success"><img src="/src/assets/images/cart.png" alt="Cart" width="20" height="20"/> Cart ({{ cartStore.cartCount }})</RouterLink>
@@ -142,6 +98,11 @@ const displayUserEmail = computed(() => {
                     Profile
                   </RouterLink>
                 </li>
+                <li v-if="authStore.isAuthenticated && authStore.getUserRoles().includes('user')">
+                  <RouterLink to="/cart-history" class="dropdown-item">
+                  Cart History
+                </RouterLink>
+                </li>
               </ul>
             </li>
           </ul>
@@ -183,11 +144,54 @@ const displayUserEmail = computed(() => {
 /* background image */
 /* .app-bg {
   min-height: 100vh;
-  background-image: url('@/assets/images/background.jpg');
+  /* background-image: url('@/assets/images/background.jpg'); */
+  /* background-color: aquamarine;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-} */
+}  */ 
+
+/* background color */
+body {
+  background-color: #efeef5;
+}
+.custom-navbar {
+  background: #72309e; /* dark blue */
+  box-shadow: 0 4px 10px rgba(16, 15, 15, 0.1);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 2.5rem;
+  color: rgb(102, 42, 120) !important;
+}
+
+.nav-link {
+  color: rgb(179, 125, 125) !important;
+  font-size: 1.1rem;
+}
+
+.nav-link:hover {
+  color: #ffd700 !important; /* gold hover */
+}
+
+.btn-outline-success {
+  border-color: white;
+  color: rgb(87, 33, 98);
+}
+
+.btn-outline-success:hover {
+  background-color: white;
+  color: #28a745;
+}
+.navbar {
+  min-height: 60px;
+  width: 118%;
+  margin-left: -9%;
+}
+
+
 
 </style>

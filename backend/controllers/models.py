@@ -68,6 +68,13 @@ class Orders(db.Model):
     
     user = db.relationship('User', backref=db.backref('orders', lazy=True))
     
+    order_items = db.relationship(
+        'OrderItems',
+        backref='order',
+        cascade="all, delete-orphan",
+        lazy=True
+    )
+    
     def __repr__(self):
         return f'<Orders {self.id} - User {self.user_id}>'
     
@@ -79,7 +86,7 @@ class OrderItems(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     
-    order = db.relationship('Orders', backref=db.backref('order_items', lazy=True))
+    # order = db.relationship('Orders', backref=db.backref('order_items', lazy=True))
     product = db.relationship('Products', backref=db.backref('order_items', lazy=True))
     
     def __repr__(self):

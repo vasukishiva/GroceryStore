@@ -96,6 +96,11 @@ api.add_resource(OfferProductAPI, '/offers/products', '/offers/products/<int:pro
 api.add_resource(OfferCategoryAPI, '/offers/categories/<int:category_id>')  
 api.add_resource(OfferMetaAPI, '/offers/meta')
 api.add_resource(OfferListAPI, '/offers/list')
+
+from controllers.Recommandation_api import RecommendationAPI
+api.add_resource(RecommendationAPI,'/recommendations')
+
+
 print(type(OfferMetaAPI))
 print(type(OffersAPI))
 
@@ -105,7 +110,7 @@ api.add_resource(OffersAPI, '/offers')
 
 from controllers.user_cartorder_crud_apis import UserCartAPI, UserOrderAPI
 api.add_resource(UserCartAPI,'/user_cart','/user_cart/<int:cart_item_id>')
-api.add_resource(UserOrderAPI,'/orders')
+api.add_resource(UserOrderAPI,'/orders','/orders/<int:order_id>')
 if __name__ == '__main__':
     app.run(debug=True)
     

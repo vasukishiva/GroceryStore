@@ -60,6 +60,12 @@ const router = createRouter({
       props: true,
     },
     {
+      
+      path: '/cart-history',
+      name: 'carthistory',
+      component: () => import('@/views/CartHistory.vue'),
+    },
+    {
       path: '/contact',
       name: 'contact',
       component: () => import('../views/ContactView.vue'),
