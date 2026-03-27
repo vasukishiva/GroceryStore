@@ -58,7 +58,7 @@ const form = reactive({
 })
 
 const handleSubmit = () => {
-  alert("Message sent successfully! ✅")
+  alert("Message sent successfully! ")
 
   form.name = ''
   form.email = ''

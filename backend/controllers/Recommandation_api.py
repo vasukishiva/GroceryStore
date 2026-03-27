@@ -19,7 +19,7 @@ class RecommendationAPI(Resource):
 
         user = current_user
 
-        # 1️⃣ Get last ordered items
+        # 1️ Get last ordered items
         orders = Orders.query.filter_by(user_id=user.id).all()
 
         product_ids = set()
@@ -28,30 +28,30 @@ class RecommendationAPI(Resource):
             for item in order.order_items:
                 product_ids.add(item.product_id)
 
-        # 2️⃣ If no orders → fallback to cart
+        # 2️ If no orders  fallback to cart
         if not product_ids:
             cart_items = CartItems.query.filter_by(user_id=user.id).all()
             for item in cart_items:
                 product_ids.add(item.product_id)
 
-        # 3️⃣ If still empty → return popular products
+        # 3️ If still empty  return popular products
         if not product_ids:
             products = Products.query.limit(5).all()
         else:
-            # 4️⃣ Get categories of these products
+            # 4️ Get categories of these products
             categories = set()
 
             for pid in product_ids:
                 product = Products.query.get(pid)
                 categories.add(product.category_id)
 
-            # 5️⃣ Recommend products from same categories
+            # 5️ Recommend products from same categories
             products = Products.query.filter(
                 Products.category_id.in_(categories),
                 ~Products.id.in_(product_ids)  # exclude already bought
             ).limit(5).all()
 
-        # 6️⃣ Format response
+        # 6️ Format response
         result = []
         for p in products:
             result.append({

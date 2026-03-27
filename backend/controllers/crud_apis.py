@@ -73,37 +73,6 @@ class CategoryCrudAPI(Resource):
             result = {'message': 'Category name already exists'}
             return make_response(jsonify(result), 400)
         
-        # image_filename = None
-        # if image:
-
-        #     filename = secure_filename(image.filename)
-        #     image_path = os.path.join(UPLOAD_FOLDER, filename)
-        #     image.save(image_path)
-        #     image_filename = filename
-            
-            
-        
-        # data = request.get_json()
-        # if not data or not data.get('name'):
-        #     result = {'message': 'Category name is required'}
-        #     return make_response(jsonify(result), 400)
-        # name = data.get('name')
-        # description = data.get('description')
-        # image_file = data.get('image_file')
-        
-        #save images to static/images/categories/
-        # image_filename = None
-        # if image_file:
-        #     filename = f"{name.replace(' ', '_').lower()}.png"
-        #     image_path = f"static/images/categories/{filename}"
-        #     with open(image_path, "wb") as img_file:
-        #         img_file.write(image_file.encode('utf-8'))
-        #     image_filename = filename
-            
-        
-        # if Categories.query.filter_by(name=name).first():
-        #     result = {'message': 'Category name already exists'}
-        #     return make_response(jsonify(result), 400)
         
         
         new_category = Categories(
@@ -153,17 +122,7 @@ class CategoryCrudAPI(Resource):
         if description:
             category.description = description
             
-        # if image:
-            
-                
-        #     ext = os.path.splitext(image.filename)[1]
-        #     filename = secure_filename(f"{image.filename}.{ext}")
-        #     image_path = os.path.join(UPLOAD_FOLDER, filename)
-        #     image.save(image_path)
-        #     category.image_file = filename
-            
-        # if image_file:
-        #     category.image_file = image_file
+        
         
         db.session.commit()
         cache.clear()
@@ -250,31 +209,7 @@ class ProductCrudAPI(Resource):
                 'image_url':request.host_url + f"static/uploads/products/{p.image_file}"
             })
         return result, 200
-        #     if not product:
-        #         result = {'message': 'Product not found'}
-        #         return make_response(jsonify(result), 404)
-        #     result = {
-        #         'id': product.id,
-        #         'name': product.name,
-        #         'description': product.description,
-        #         'price': product.price,
-        #         'stock': product.stock,
-        #         'category_id': product.category_id
-        #     }
-        #     return make_response(jsonify(result), 200)
-        # else:
-        #     products = Products.query.all()
-        #     result = []
-        #     for product in products:
-        #         result.append({
-        #             'id': product.id,
-        #             'name': product.name,
-        #             'description': product.description,
-        #             'price': product.price,
-        #             'stock': product.stock,
-        #             'category_id': product.category_id
-        #         })
-        #     return make_response(jsonify(result), 200)  
+        
 
     @auth_token_required
     @roles_required('admin')

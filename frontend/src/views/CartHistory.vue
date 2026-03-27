@@ -32,11 +32,11 @@ async function pay(orderId) {
     })
 
     if (res.ok) {
-      alert("Payment Successful ✅")
+      alert("Payment Successful ")
       await fetchOrders()
       await cartStore.fetchCart()   // update navbar count
     } else {
-      alert("Payment failed ❌")
+      alert("Payment failed ")
     }
   } catch (error) {
     console.error("Payment error:", error)
@@ -75,7 +75,7 @@ onMounted(fetchOrders)
 
 <template>
   <div class="container mt-4">
-    <h3>🧾 Cart History</h3>
+    <h3> Cart History</h3>
 
     <div v-if="orders.length === 0" class="alert alert-info">
       No purchase history available.
@@ -117,7 +117,7 @@ onMounted(fetchOrders)
       </div>
       <div v-if="order.status !== 'PAID'" class="mt-3 d-flex gap-2">
 
-        <!-- ✅ Pay -->
+        <!--  Pay -->
         <button
             class="btn btn-success btn-sm"
             @click="pay(order.order_id)"
@@ -125,7 +125,7 @@ onMounted(fetchOrders)
             Pay Now
         </button>
 
-        <!-- ❌ Delete -->
+        <!--  Delete -->
         <button
             class="btn btn-danger btn-sm"
             @click="deleteOrder(order.order_id)"
