@@ -73,21 +73,21 @@ onMounted(() => {
     </div>
     <div class="carousel-inner">
       <div class="carousel-item">
-        <img src="/src/assets/images/slides/slide1.avif" class="d-block w-100" alt="Fresh Produce">
+        <img src="/src/assets/images/slides/slide8.webp" class="d-block w-100" alt="Fresh Produce">
         <div class="carousel-caption d-none d-md-block">
           <h5>Fresh Produce</h5>
           <p>Get the freshest fruits and vegetables delivered to your door.</p>
         </div>
       </div>
       <div class="carousel-item active">
-        <img src="/src/assets/images/slides/slide2.jpg" class="d-block w-100" alt="Dairy Products">
+        <img src="/src/assets/images/slides/slide9.jpg" class="d-block w-100" alt="Dairy Products">
         <div class="carousel-caption d-none d-md-block">
           <h5>Dairy Products</h5>
           <p>Discover our wide selection of milk, cheese, and yogurt.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="/src/assets/images/slides/slide6.avif" class="d-block w-100" alt="Bakery Items">
+        <img src="/src/assets/images/slides/slide7.webp" class="d-block w-100" alt="Bakery Items">
         <div class="carousel-caption d-none d-md-block">
           <h5>Bakery Items</h5>
           <p>Indulge in our freshly baked bread, pastries, and cakes.</p>

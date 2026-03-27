@@ -9,6 +9,7 @@ const token = authStore.getAuthToken()
 const email = authStore.getUserEmail()
 const isAdmin = authStore.getUserRoles().includes('admin');
 
+
 const recommendations = ref([])
 const loading = ref(true)
 
@@ -39,7 +40,7 @@ onMounted(fetchRecommendations)
   <div class="container mt-5">
 
     <!-- Title -->
-    <div class="d-flex justify-content-between align-items-center mb-3" v-if="!isAdmin">
+    <div class="d-flex justify-content-between align-items-center mb-3" v-if="!isAdmin && (authStore.isAuthenticated)">
       <h3>✨ Recommended for {{ email }}</h3>
     </div>
 
@@ -49,7 +50,7 @@ onMounted(fetchRecommendations)
     </div>
 
     <!-- Empty -->
-    <div v-else-if="recommendations.length === 0 && !isAdmin" class="alert alert-info">
+    <div v-else-if="recommendations.length === 0 && !isAdmin && (authStore.isAuthenticated)" class="alert alert-info">
       No recommendations available.
     </div>
 
